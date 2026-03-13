@@ -1,0 +1,28 @@
+# Expected output = 1
+from typing import List
+
+n = 9
+a = [1, 2, 2, 1, 2, 1, 1, 1, 1]
+
+
+def max_dish(a: List[int], n: int) -> int:
+    my_set = set(a)
+    max_count_hash = {dish: 0 for dish in my_set}
+
+    for dish_type in my_set:
+        last_picked_idx = -2
+
+        for l in range(n):
+            if a[l] == dish_type and l > last_picked_idx + 1:
+                max_count_hash[dish_type] += 1
+                last_picked_idx = l
+        max_dish_counter = -1
+        max_count_item = 0
+    for j in sorted(max_count_hash.keys()):
+        if max_count_hash[j] > max_dish_counter:
+            max_dish_counter = max_count_hash[j]
+            max_count_item = j
+    return max_count_item
+
+
+print(max_dish(a, n))
