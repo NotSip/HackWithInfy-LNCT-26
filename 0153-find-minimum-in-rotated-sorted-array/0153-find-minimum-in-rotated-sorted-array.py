@@ -3,7 +3,6 @@ class Solution:
         n = len(nums)
         low = 0
         high = n-1
-        curr_min = float("inf")
 
         while low < high:
             mid = low + (high - low) // 2
