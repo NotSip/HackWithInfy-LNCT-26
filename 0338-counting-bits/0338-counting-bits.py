@@ -3,9 +3,8 @@ class Solution:
         output = []
         for i in range(n+1):
             count = 0
-            while i:
-                count+= i%2
-                i//=2
-
+            while i>0 :
+                i = i & (i-1)
+                count+=1
             output.append(count)
         return output
