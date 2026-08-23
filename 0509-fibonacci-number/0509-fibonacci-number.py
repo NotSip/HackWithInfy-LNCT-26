@@ -1,10 +1,15 @@
 class Solution:
     def fib(self, n: int) -> int:
-        def fibonacci(n):
+        dp = [-1]*(n+1)
+        def fibonacci(dp,n):
             if n == 0:
                 return 0
             if n == 1:
                 return 1
-            return fibonacci(n-1)+fibonacci(n-2)
+            if dp[n]!=-1:
+                return dp[n]
+            dp[n]= fibonacci(dp,n-1)+fibonacci(dp,n-2)
 
-        return fibonacci(n)
+            return dp[n]
+
+        return fibonacci(dp,n)
