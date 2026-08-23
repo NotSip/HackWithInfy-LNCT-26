@@ -1,22 +1,16 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return nums[0]
+        dp = [0]*(len(nums))
+        dp[0] = nums[0]
+        dp[1] = max(nums[0],nums[1])
 
-        n = len(nums)
-        dp = [-1]*(n+1)
+        for i in range(2,len(nums)):
+            dp[i] = max(dp[i-1],nums[i]+dp[i-2])
 
-        def chori(dp,n):
-            if n == 0:
-                return nums[n]
-            if n < 0:
-                return 0
+        return dp[-1]
 
-            if dp[n]!=-1:
-                return dp[n]
-
-            pick = nums[n]+chori(dp,n-2)
-            not_pick = chori(dp,n-1)
-            dp[n] = max(pick,not_pick)
-            return dp[n]
-        return chori(dp,n-1)
-
-        # Memoization
+        # tabulation
