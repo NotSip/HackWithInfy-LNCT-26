@@ -1,18 +1,21 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        if not nums:
-            return 0
-        if len(nums) == 1:
-            return nums[0]
+        n = len(nums)
+        dp = [-1]*n
+        def chori(idx):
+            if dp[idx] != -1:
+                return dp[idx]
 
-        prev2 = nums[0]
-        prev = max(nums[0],nums[1])
+            if idx == 0:
+                return nums[idx]
+            if idx < 0:
+                return 0
+            adj1 = chori(idx-2)+nums[idx]
+            adj2 = chori(idx-1)
 
-        for i in range(2,len(nums)):
-            curr = max(prev,nums[i]+prev2)
-            prev2 = prev
-            prev = curr
+            dp[idx] = max(adj1,adj2)
+            return dp[idx]
 
-        return prev
 
-        # tabulation space optimized
+        return chori(n-1)
+        
